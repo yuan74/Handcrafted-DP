@@ -150,6 +150,9 @@ sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 print("model loaded!")
 
+# The above time for loading model took 3-4 minutes on my machine.
+
+
 features_train = []
 for i in range(len(xtrain)//batch_size):
     x_batch = xtrain[i*batch_size:(i+1)*batch_size]
@@ -172,15 +175,21 @@ os.makedirs("transfer/features/", exist_ok=True)
 np.save("transfer/features/simclr_r50_2x_sk1_train.npy", features_train)
 np.save("transfer/features/simclr_r50_2x_sk1_test.npy", features_test)
 
-mean = np.mean(features_train, axis=0)
-var = np.var(features_train, axis=0)
 
-features_train_norm = (features_train - mean) / np.sqrt(var + 1e-5)
-features_test_norm = (features_test - mean) / np.sqrt(var + 1e-5)
+# The above feature extracting code took around 4-5 minutes on my machine.
 
-for C in [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]:
-    clf = LogisticRegression(random_state=0, max_iter=1000, C=C).fit(features_train, ytrain)
-    print(C, clf.score(features_train, ytrain), clf.score(features_test, ytest))
 
-    clf = LogisticRegression(random_state=0, max_iter=1000, C=C).fit(features_train_norm, ytrain)
-    print(C, clf.score(features_train_norm, ytrain), clf.score(features_test_norm, ytest))
+# Commenting out the code for directing solving logistic regression problem and not relevant to transfer learning with sgd or other optimization algorithms...
+
+# mean = np.mean(features_train, axis=0)
+# var = np.var(features_train, axis=0)
+
+# features_train_norm = (features_train - mean) / np.sqrt(var + 1e-5)
+# features_test_norm = (features_test - mean) / np.sqrt(var + 1e-5)
+
+# for C in [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]:
+#     clf = LogisticRegression(random_state=0, max_iter=1000, C=C).fit(features_train, ytrain)
+#     print(C, clf.score(features_train, ytrain), clf.score(features_test, ytest))
+
+#     clf = LogisticRegression(random_state=0, max_iter=1000, C=C).fit(features_train_norm, ytrain)
+#     print(C, clf.score(features_train_norm, ytrain), clf.score(features_test_norm, ytest))

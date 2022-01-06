@@ -15,21 +15,37 @@ The main dependencies are [pytorch](https://github.com/pytorch/pytorch),
 [kymatio](https://github.com/kymatio/kymatio) 
 and [opacus](https://github.com/pytorch/opacus).
 
-1. Create venv:
+To run the code, please set up the tensorflow environment with the following steps.
+
+1. Create conda environment
 ```
-python3 -m venv myvenv
-source myvenv/bin/activate
+conda create --name mytf python==3.8.10
+conda activate mytf
 ```
-2. Install pytorch with CUDA support for GeForce GTX 3090:
+
+2. Install Cuda Toolkit, CuDNN and pip
+```
+conda install -c anaconda cudatoolkit
+conda install -c conda-forge cudnn
+conda install -n mytf pip
+```
+
+3. Install pytorch and other requirements with:
 ```
 pip3 install torch==1.10.1+cu113 torchvision==0.11.2+cu113 torchaudio==0.10.1+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-```
-3. Install all requirements with:
-```
 pip3 install -r requirements.txt
 ```
 
-The code was tested with `python 3.8`, `torch 1.10.1` and `CUDA 11.4`.
+The code was tested with `python 3.8`, `torch 1.10.1`, `tensorflow-2.5.0` and `CUDA 11.4`.
+
+
+(If you encounter the error: Could not load dynamic library 'libcusolver.so.11' , please try to locate the file in installation path and add it
+```
+find / -name libcusolver.so*
+cd /home/ubuntu/anaconda3/envs/mytf/lib/
+cp libcusolver.so.10 libcusolver.so.11
+```
+)
 
 
 ## Example Usage and Results
