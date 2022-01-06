@@ -106,6 +106,7 @@ celerybeat.pid
 .venv
 env/
 venv/
+myvenv/
 ENV/
 env.bak/
 venv.bak/
@@ -132,3 +133,10 @@ dmypy.json
 figures/
 .DS_STORE
 .idea/
+
+
+# ignoring data, log, etc.
+.data/
+bn_stats/
+logs/
+transfer/

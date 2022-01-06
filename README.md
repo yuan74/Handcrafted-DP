@@ -15,12 +15,21 @@ The main dependencies are [pytorch](https://github.com/pytorch/pytorch),
 [kymatio](https://github.com/kymatio/kymatio) 
 and [opacus](https://github.com/pytorch/opacus).
 
-You can install all requirements with:
-```bash
-pip install -r requirements.txt
+1. Create venv:
+```
+python3 -m venv myvenv
+source myvenv/bin/activate
+```
+2. Install pytorch with CUDA support for GeForce GTX 3090:
+```
+pip3 install torch==1.10.1+cu113 torchvision==0.11.2+cu113 torchaudio==0.10.1+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+```
+3. Install all requirements with:
+```
+pip3 install -r requirements.txt
 ```
 
-The code was tested with `python 3.7`, `torch 1.6` and `CUDA 10.1`.
+The code was tested with `python 3.8`, `torch 1.10.1` and `CUDA 11.4`.
 
 
 ## Example Usage and Results
